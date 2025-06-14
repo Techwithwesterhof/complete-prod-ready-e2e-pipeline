@@ -35,6 +35,17 @@ pipeline{
             }
 
         }
+
+        stage("Sonarqube Analysis") {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'prod-ready-cicd-sonartoken') {
+                        sh "mvn sonar:sonar"
+                    }
+                }
+            }
+
+        }
     }
 
 }
